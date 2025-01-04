@@ -58,40 +58,61 @@ Machine Learning
    cd repo-name  
    ```  
 
-3. **Install Dependencies**  
-   Navigate to the project folder you're interested in.  
-   For example:  
+3. **Navigate to Project and Setup environment**  
+   Navigate to the project folder you're interested in.
+   
    ```bash  
    cd Fake-News-Detector
-   ```  
+   ```
+   Now, after setting path, run following commands on command prompt.
+   
+   ```bash  
+   python -m venv venv
+   ```
+   
+   Followed by
+   
+    ```bash  
+   .\venv\Scripts\activate
+   ```
+
+4. **Install Dependencies**
    Load the dataset (if any) and Install necessary Libraries
-
----
-
+   
    Install requirements
 
    ```bash  
    pip install requirements.txt
    ```     
 
-4. **Make Your Contributions**  
+5. **In case of installation error** (Skip step 5 if successful Step 4)
+
+   Install separate dependencies
+
+   For example:
+   ```bash  
+   pip install "library_name"
+   ``` 
+
+7. **Make Your Contributions**  
    - Add Features.
    - Train models.
    - Enhance Accuracy.
    - Improve UI.
    - Test your changes.  
 
-5. **Run and test your changes**  
+8. **Run and test your changes**  
    Run the Flask Application  
    For example:  
    ```bash  
    python app.py
    ```  
 
-6. **Submit a Pull Request**  
+9. **Submit a Pull Request**  
    Push your changes and create a pull request to propose your contributions! 🎉  
 
 ---
+
 
 ## 🤝 Contributing Guidelines  
 
