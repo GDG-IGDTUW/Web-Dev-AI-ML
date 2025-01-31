@@ -32,7 +32,7 @@ By analyzing the textual content of news articles, the app uses Natural Language
 - **Text Input:** Allows users to input news article text for analysis.
 - **Prediction Model:** Applies a trained NLP model to classify the input text as real or fake news.
 - **Result Display:** Shows the classification result to the user, indicating the likelihood of the news being fake.
-
+![alt text](image.png)
 ---
 
 ## ⚙️ Technical Details:
