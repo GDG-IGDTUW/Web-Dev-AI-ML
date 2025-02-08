@@ -51,6 +51,25 @@ plt.show()
 
 # The plot shows that has a few outliers with excessively large values
 
+# Issue #4: Check for Missing Values and Fill missing values if any
+print(df.inull().sum())
+
+#There are no missing values here, replacing outliers of chol column with mean values
+# Identify outliers in the "chol" column using the IQR method
+Q1 = df["chol"].quantile(0.25)
+Q3 = df["chol"].quantile(0.75)
+IQR = Q3 - Q1
+
+# lower and upper bounds for outliers
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+
+# mean of non-outlier values
+chol_mean = df[(df["chol"] >= lower_bound) & (df["chol"] <= upper_bound)]["chol"].mean()
+
+# Replacing outliers with the mean value
+df.loc[(df["chol"] < lower_bound) | (df["chol"] > upper_bound), "chol"] = chol_mean
+
 
 # model building 
 
