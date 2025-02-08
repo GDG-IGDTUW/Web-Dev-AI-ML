@@ -11,6 +11,7 @@ from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import GridSearchCV
 
 
 # loading and reading the dataset
@@ -97,6 +98,31 @@ print('Accuracy: {}%\n'.format(round((accuracy_score(y_test, y_pred)*100),2)))
 
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
+
+# Issue #3: Increase Accuracy using Hyperparameter Tuning 
+# hyperparameter grid
+param_grid = {
+    'n_estimators': [10, 50, 100],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+}
+model = RandomForestClassifier()
+
+# Grid Search Cross-Validation
+grid_search = GridSearchCV(model, param_grid, cv=5, n_jobs=-1, verbose=1)
+grid_search.fit(x_train_scaler, y_train)
+# Best Parameters & Score
+print("Best Parameters:", grid_search.best_params_)
+print("Best Score:", grid_search.best_score_)
+
+# Evaluate best model
+y_pred = grid_search.best_estimator_.predict(x_test_scaler)
+p = grid_search.best_estimator_.score(x_test_scaler, y_test)
+print("Test Accuracy:", p)
+
+# Best Score: 0.8647474747474748
+# Test Accuracy: 0.8
 
 # Creating a pickle file for the classifier
 filename = 'heart-disease-prediction-knn-model.pkl'
