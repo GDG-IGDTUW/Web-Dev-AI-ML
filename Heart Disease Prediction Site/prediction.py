@@ -24,6 +24,34 @@ heart_df = heart.copy()
 heart_df = heart_df.rename(columns={'condition':'target'})
 print(heart_df.head())
 
+# Issue #1: Exploratory Data Analysis and Plots
+print(df.info())
+print(df.descrube())
+
+# Count plot for categorical variables
+plt.figure(figsize=(7, 5))
+sns.countplot(x="sex", hue="condition", data=df, palette="Set1")
+plt.title("Condition Count by Sex")
+plt.show()
+
+# Correlation Heatmap
+plt.figure(figsize=(12, 6))
+sns.heatmap(df.corr(), annot=True, cmap="coolwarm", linewidths=0.5)
+plt.title("Feature Correlation Heatmap")
+plt.show()
+
+# The plot shows that the following columns have a high correlation with the condition column: thal, ca, oldpeak, exang and cp.
+
+# Boxplots for detecting outliers
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=df)
+plt.xticks(rotation=90)
+plt.title("Boxplots of Features")
+plt.show()
+
+# The plot shows that has a few outliers with excessively large values
+
+
 # model building 
 
 #fixing our data in x and y. Here y contains target data and X contains rest all the features.
