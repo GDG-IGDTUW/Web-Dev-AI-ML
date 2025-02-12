@@ -49,6 +49,43 @@ Implemented using Flask, a lightweight WSGI web application framework in Python.
 Machine Learning
 
 ---
+## Workflow
+
+### 1. Importing Necessary Dependencies
+The following libraries are used:
+- **NumPy & Pandas**: Data handling and numerical operations.
+- **Pickle**: Model serialization for future use.
+- **Scikit-learn**: Preprocessing, model training, evaluation, and hyperparameter tuning.
+- **Matplotlib & Seaborn**: Data visualization for analysis.
+
+### 2. Data Loading and Preprocessing
+- The dataset is loaded into a Pandas DataFrame.
+- The `condition` column is renamed to `target` for clarity.
+- Missing values and outliers are handled appropriately.
+
+### 3. Exploratory Data Analysis (EDA)
+- Visualizations like count plots, correlation heatmaps, and boxplots are used to understand feature relationships and outliers.
+
+### 4. Feature Scaling & Splitting Data
+- Features (`X`) and target (`y`) variables are separated.
+- The dataset is split into training (75%) and testing (25%) sets.
+- `StandardScaler` is applied for normalization.
+
+### 5. Model Training & Evaluation
+- A **Random Forest Classifier** is trained.
+- Predictions are made on the test set.
+- Accuracy, classification reports, and confusion matrices are generated for evaluation.
+
+### 6. Hyperparameter Tuning
+- `GridSearchCV` is used to find optimal hyperparameters for the Random Forest model.
+- The best model is evaluated on the test set.
+
+### 7. Model Serialization
+- The trained model is saved as a pickle file (`.pkl`) for future use.
+
+## Contributors
+- **Akshay** [github](https://github.com/Akshayk05)
+---
 
 ## 🛠️ How to Get Started  
 
