@@ -57,7 +57,7 @@ The images are preprocessed using a variety of techniques such as Grayscale Conv
 Faces in the image as well as their coordinates are detected using the face_location() function. The coordinates are then used to draw bounding boxes around the face(s).
 The images is then saved in the folder.
 
-## Serving Processed Images:
+### Serving Processed Images:
 The Flask application returns a JSON response containing the URL of the processed image after an image is uploaded and processed. This URL is them used to request and display the final image.
 ---
 
