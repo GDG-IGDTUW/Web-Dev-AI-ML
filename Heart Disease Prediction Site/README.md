@@ -28,6 +28,9 @@ The Heart Disease Prediction project is a web application designed to predict th
  - **User Input Form:** Collects essential health-related information from the user.
  - **Prediction Model:** Utilizes a trained Machine Learning model to analyze input data and predict the probability of heart disease.
  - **Result Display:** Presents the prediction outcome to the user in an understandable format.
+ - **Interactive Plots:**: Condition Count by Sex, Boxplot for outliers, Correlation heatmap, etc.
+   ![alt text](image.png) ![alt text](image-1.png) ![alt text](image-2.png)
+
 
 ---
 
