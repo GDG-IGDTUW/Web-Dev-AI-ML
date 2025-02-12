@@ -53,7 +53,7 @@ The flask app is initialized and a folder is created to store the uploaded and p
 ### Image Preprocessing:
 The images are preprocessed using a variety of techniques such as Grayscale Conversion, Gaussian Blur (to reduce noise) and Sharpening Filter (to enhance facial edges).
 
-## Face Detection and Processing:
+### Face Detection and Processing:
 Faces in the image as well as their coordinates are detected using the face_location() function. The coordinates are then used to draw bounding boxes around the face(s).
 The images is then saved in the folder.
 
