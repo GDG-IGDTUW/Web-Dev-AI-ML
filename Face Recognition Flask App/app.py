@@ -19,6 +19,26 @@ def index():
 
 # Route to handle image upload and face recognition
 @app.route('/upload', methods=['POST'])
+
+#Issue #7: Implement Preprocessing for Input Images 
+
+def preprocess_image(file_path):
+    image = cv2.imread(file_path)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # grayscale
+    
+    # Applying Gaussian Blur to reduce noise
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    
+    # Sharpening filter to enhance edges
+    kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
+    sharpened = cv2.filter2D(blurred, -1, kernel)
+    
+    # Save preprocessed image
+    processed_path = file_path.replace('.jpg', '_processed2.jpg')
+    cv2.imwrite(processed_path, sharpened)
+    
+    return processed_path  # Returns new image path
+
 def upload_image():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
@@ -30,9 +50,12 @@ def upload_image():
     # Save the uploaded image
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(file_path)
+    
+    # Preprocess Image Before Face Detection
+    processed_path = preprocess_image(file_path)
 
     # Load the uploaded image using face_recognition
-    image = face_recognition.load_image_file(file_path)
+    image = face_recognition.load_image_file(processed_path)
     face_locations = face_recognition.face_locations(image)
 
     # Convert image to RGB for displaying and saving
