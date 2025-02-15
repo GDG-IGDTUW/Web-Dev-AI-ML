@@ -45,6 +45,24 @@ Built with Flask to handle server-side operations.
 
 ---
 
+## ⚙️ Workflow Details:
+
+### Initializing the Flask App: 
+The flask app is initialized and a folder is created to store the uploaded and processed images. A simple page allows the user to upload their images.
+
+### Image Preprocessing:
+The images are preprocessed using a variety of techniques such as Grayscale Conversion, Gaussian Blur (to reduce noise) and Sharpening Filter (to enhance facial edges).
+
+### Face Detection and Processing:
+Faces in the image as well as their coordinates are detected using the face_location() function. The coordinates are then used to draw bounding boxes around the face(s).
+The images is then saved in the folder.
+
+### Serving Processed Images:
+The Flask application returns a JSON response containing the URL of the processed image after an image is uploaded and processed. This URL is them used to request and display the final image.
+
+
+---
+
 ## Project Category: 
 Computer Vision, Image Processing
 
