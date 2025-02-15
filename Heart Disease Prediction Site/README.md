@@ -87,6 +87,19 @@ The following libraries are used:
 - **Akshay** [github](https://github.com/Akshayk05)
 ---
 
+## Model Training Process
+-**Data Preprocessing:** A dataset containing medical information about patients with heart diseases is uploaded and relevant visualization are plotted. Missing information and outliers in the data are dealt with using statistical methods.
+
+-**Feature Engineering:** The target variable and features are split into training and testing sets, which are scaled to normalize values.
+
+-**Model Training and Evaluation:** A random forest classifier with n_estimators = 20 is trained on the training data. Testing revealed an accuracy of 81.33%.
+
+-**Hyperparameter Tuning for Improved Accuracy:** Grid Search is done to obtain the optimal hyperparameters for the Random Forest Classifier. The accuracy score improved to 86.47%.
+
+-**Model Saving:** The final trained model is saved as a pickle file to be used in the flask application.
+
+---
+
 ## 🛠️ How to Get Started  
 
 1. **Fork this Repository**  
