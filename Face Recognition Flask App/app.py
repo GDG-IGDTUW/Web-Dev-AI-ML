@@ -38,11 +38,16 @@ def upload_image():
     # Convert image to RGB for displaying and saving
     pil_image = Image.open(file_path).convert("RGB")
     draw = ImageDraw.Draw(pil_image)
+    font = ImageFont.load_default()
 
     # Draw rectangles around detected faces
-    for face_location in face_locations:
-        top, right, bottom, left = face_location
+    #Issue #8 Image labelling functionality
+    detected_faces = []
+    for i, (top, right, bottom, left) in enumerate(face_locations):
+        person_lbl = f"Person {i+1}"
         draw.rectangle([left, top, right, bottom], outline="red", width=5)
+        draw.text((left, top-10), person_lbl, fill="blue", font=font)
+        detected_faces.append({'name':person_lbl, 'box':[top, right, bottom, left]})
 
     # Save the image with faces highlighted
     result_image_path = os.path.join(app.config['UPLOAD_FOLDER'], 'result_' + file.filename)
@@ -52,6 +57,7 @@ def upload_image():
     return jsonify({
         'message': 'File uploaded and faces detected!',
         'image': f'/uploads/{os.path.basename(result_image_path)}'
+        'faces':detected_faces
     })
 
 # Route to serve uploaded and processed images
