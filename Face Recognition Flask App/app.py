@@ -2,7 +2,6 @@ import os
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import face_recognition
 from PIL import Image, ImageDraw
-
 app = Flask(__name__)
 
 # Folder to save uploaded images
@@ -38,7 +37,7 @@ def preprocess_image(file_path):
     cv2.imwrite(processed_path, sharpened)
     
     return processed_path  # Returns new image path
-
+@app.route('/upload', methods=['POST'])
 def upload_image():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
@@ -47,33 +46,31 @@ def upload_image():
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
 
-    # Save the uploaded image
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    upload_folder = os.path.abspath(app.config['UPLOAD_FOLDER'])
+    file_path = os.path.join(upload_folder, file.filename)
     file.save(file_path)
-    
-    # Preprocess Image Before Face Detection
-    processed_path = preprocess_image(file_path)
 
-    # Load the uploaded image using face_recognition
+    processed_path = preprocess_image(file_path)
     image = face_recognition.load_image_file(processed_path)
     face_locations = face_recognition.face_locations(image)
 
-    # Convert image to RGB for displaying and saving
-    pil_image = Image.open(file_path).convert("RGB")
+    if len(face_locations) == 0:
+        return jsonify({'error': 'Face not detected'})
+    elif len(face_locations) > 1:
+        return jsonify({'error': 'Multiple faces detected'})
+
+    pil_image = Image.open(processed_path).convert("RGB")
     draw = ImageDraw.Draw(pil_image)
 
-    # Draw rectangles around detected faces
     for face_location in face_locations:
         top, right, bottom, left = face_location
         draw.rectangle([left, top, right, bottom], outline="red", width=5)
 
-    # Save the image with faces highlighted
-    result_image_path = os.path.join(app.config['UPLOAD_FOLDER'], 'result_' + file.filename)
+    result_image_path = os.path.join(upload_folder, 'result_' + file.filename)
     pil_image.save(result_image_path)
 
-    # Return the result image path
     return jsonify({
-        'message': 'File uploaded and faces detected!',
+        'message': 'File uploaded and face detected!',
         'image': f'/uploads/{os.path.basename(result_image_path)}'
     })
 
